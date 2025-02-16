@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:munit="http://www.mulesoft.org/schema/mule/munit" xmlns:munit-tools="http://www.mulesoft.org/schema/mule/munit-tools"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xsi:schemaLocation="
+		http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+		http://www.mulesoft.org/schema/mule/munit http://www.mulesoft.org/schema/mule/munit/current/mule-munit.xsd
+		http://www.mulesoft.org/schema/mule/munit-tools  http://www.mulesoft.org/schema/mule/munit-tools/current/mule-munit-tools.xsd">
+	<munit:config name="bba-test-suite.xml" />
+	<munit:test name="bba-test-suite-bbaFlowTest" doc:id="e9bfc525-0c00-4173-8b18-73174ccc414c" description="Test">
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to bbaFlow" doc:id="05e1b912-2c02-45d6-a24d-6f61d4977be1" name="bbaFlow"/>
+		</munit:execution>
+	</munit:test>
+
+
+</mule>
