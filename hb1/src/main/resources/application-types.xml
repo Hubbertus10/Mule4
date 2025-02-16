@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<types:mule xmlns:types="http://www.mulesoft.org/schema/mule/types">
+  <types:catalog>
+    <types:type name="NewData" format="json">
+      <types:shape format="weave" example="examples/mule-artifact.json"><![CDATA[%dw 2.0
+
+type NewData = {|
+  minMuleVersion: String, 
+  javaSpecificationVersions: Array<String>
+|} {"example": "{\\\"minMuleVersion\\\":\\\"4.7.0\\\",\\\"javaSpecificationVersions\\\":[\\\"1.8\\\"]}"}
+
+]]></types:shape>
+    </types:type>
+  </types:catalog>
+  <types:enrichment select="#a7f3725d-39a3-4709-9bb2-31ecc850999b"/>
+</types:mule>

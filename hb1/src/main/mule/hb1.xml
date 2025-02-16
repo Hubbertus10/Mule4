@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:db="http://www.mulesoft.org/schema/mule/db" xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd
+http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/current/mule-db.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="95634319-8717-460f-8b6d-c45afdec8886" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<db:config name="Database_Config" doc:name="Database Config" doc:id="a20eeba4-e505-4ad4-b4d8-9bebd9dca71f" >
+		<db:my-sql-connection host="localhost" port="3306" user="root" password="Judasz666!" database="mule" />
+	</db:config>
+	<flow name="hb1Flow1" doc:id="012857ea-6fab-4233-938b-f4cf90ef920d" >
+		<http:listener doc:name="databaseselect" doc:id="8fcd6639-2fbc-4048-89b3-2ba340c1ed97" path="/database" config-ref="HTTP_Listener_config"/>
+		<db:select doc:name="Select" doc:id="eba78861-6fff-4660-8ee1-2d3d135874f0" config-ref="Database_Config">
+			<db:sql ><![CDATA[SELECT * FROM mule.customers]]></db:sql>
+		</db:select>
+		<ee:transform doc:name="Transform Message" doc:id="8f3aff00-6f99-446d-a475-ce6ee2820515">
+			<ee:message>
+				<ee:set-payload><![CDATA[%dw 2.0
+output application/json
+---
+payload 
+]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<db:insert doc:name="Insert" doc:id="c36384a4-7fdf-48f0-85ed-395022fdc020" config-ref="Database_Config">
+			<db:sql><![CDATA[INSERT INTO `mule`.`customers` (`ClientID`, `FirstName`, `LastName`, `AccountNo`, `Balance`) VALUES ('3221', 'tttt', 'Rujhsj', '200', '67489');
+]]></db:sql>
+		</db:insert>
+		<ee:transform doc:name="Transform Message" doc:id="7780d543-fb5a-4366-bdb7-441cbb2b68dc">
+			<ee:message>
+				<ee:set-payload><![CDATA[%dw 2.0
+output application/json
+---
+payload]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+	</flow>
+</mule>
